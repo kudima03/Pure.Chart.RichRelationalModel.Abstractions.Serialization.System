@@ -1,11 +1,12 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Pure.Chart.RichRelationalModel.Abstractions.Serialization.System.Tests.Fakes;
-using Pure.Chart.RichRelationalModel.Abstractions.Serialization.System.Tests.Hashes;
+using Pure.Chart.Model.Abstractions;
+using Pure.Chart.RichRelationalModel.HashCodes;
 using Pure.Primitives.Abstractions.Serialization.System;
 using Pure.Primitives.Abstractions.String;
 using Pure.Primitives.Random.String;
 using Char = Pure.Primitives.Char.Char;
+using Guid = Pure.Primitives.Guid.Guid;
 
 namespace Pure.Chart.RichRelationalModel.Abstractions.Serialization.System.Tests;
 
@@ -36,41 +37,41 @@ public sealed record ChartRichRelationalModelConverterTests
     [Fact]
     public void Write()
     {
-        FakeGuid chartId = new FakeGuid();
+        Guid chartId = new Guid();
         IString title = new RandomString(new Char('a'), new Char('z'));
         IString description = new RandomString(new Char('a'), new Char('z'));
 
-        FakeGuid typeId = new FakeGuid();
+        Guid typeId = new Guid();
         IString typeName = new RandomString(new Char('a'), new Char('z'));
-        FakeChartTypeRichRelationalModel type = new FakeChartTypeRichRelationalModel(
+        ChartTypeRichRelationalModel type = new ChartTypeRichRelationalModel(
             typeId,
             typeName
         );
 
-        FakeGuid xAxisId = new FakeGuid();
-        FakeGuid xAxisChartId = new FakeGuid();
+        Guid xAxisId = new Guid();
+        Guid xAxisChartId = new Guid();
         IString xAxisLegend = new RandomString(new Char('a'), new Char('z'));
-        FakeAxisRichRelationalModel xAxis = new FakeAxisRichRelationalModel(
+        AxisRichRelationalModel xAxis = new AxisRichRelationalModel(
             xAxisId,
             xAxisChartId,
             xAxisLegend
         );
 
-        FakeGuid yAxisId = new FakeGuid();
-        FakeGuid yAxisChartId = new FakeGuid();
+        Guid yAxisId = new Guid();
+        Guid yAxisChartId = new Guid();
         IString yAxisLegend = new RandomString(new Char('a'), new Char('z'));
-        FakeAxisRichRelationalModel yAxis = new FakeAxisRichRelationalModel(
+        AxisRichRelationalModel yAxis = new AxisRichRelationalModel(
             yAxisId,
             yAxisChartId,
             yAxisLegend
         );
 
-        FakeGuid seriesId = new FakeGuid();
-        FakeGuid seriesChartId = new FakeGuid();
+        Guid seriesId = new Guid();
+        Guid seriesChartId = new Guid();
         IString seriesLegend = new RandomString(new Char('a'), new Char('z'));
         IString xAxisSource = new RandomString(new Char('a'), new Char('z'));
         IString yAxisSource = new RandomString(new Char('a'), new Char('z'));
-        FakeSeriesRichRelationalModel series = new FakeSeriesRichRelationalModel(
+        SeriesRichRelationalModel series = new SeriesRichRelationalModel(
             seriesId,
             seriesChartId,
             seriesLegend,
@@ -78,7 +79,7 @@ public sealed record ChartRichRelationalModelConverterTests
             yAxisSource
         );
 
-        IChartRichRelationalModel chart = new FakeChartRichRelationalModel(
+        IChartRichRelationalModel chart = new ChartRichRelationalModel(
             chartId,
             title,
             description,
@@ -134,39 +135,39 @@ public sealed record ChartRichRelationalModelConverterTests
     [Fact]
     public void Read()
     {
-        FakeGuid chartId = new FakeGuid();
+        Guid chartId = new Guid();
         IString title = new RandomString(new Char('a'), new Char('z'));
         IString description = new RandomString(new Char('a'), new Char('z'));
 
-        FakeGuid typeId = new FakeGuid();
+        Guid typeId = new Guid();
         IString typeName = new RandomString(new Char('a'), new Char('z'));
 
-        FakeGuid xAxisId = new FakeGuid();
-        FakeGuid xAxisChartId = new FakeGuid();
+        Guid xAxisId = new Guid();
+        Guid xAxisChartId = new Guid();
         IString xAxisLegend = new RandomString(new Char('a'), new Char('z'));
 
-        FakeGuid yAxisId = new FakeGuid();
-        FakeGuid yAxisChartId = new FakeGuid();
+        Guid yAxisId = new Guid();
+        Guid yAxisChartId = new Guid();
         IString yAxisLegend = new RandomString(new Char('a'), new Char('z'));
 
-        FakeGuid seriesId = new FakeGuid();
-        FakeGuid seriesChartId = new FakeGuid();
+        Guid seriesId = new Guid();
+        Guid seriesChartId = new Guid();
         IString seriesLegend = new RandomString(new Char('a'), new Char('z'));
         IString xAxisSource = new RandomString(new Char('a'), new Char('z'));
         IString yAxisSource = new RandomString(new Char('a'), new Char('z'));
 
-        IChartRichRelationalModel expected = new FakeChartRichRelationalModel(
+        IChartRichRelationalModel expected = new ChartRichRelationalModel(
             chartId,
             title,
             description,
             typeId,
-            new FakeChartTypeRichRelationalModel(typeId, typeName),
+            new ChartTypeRichRelationalModel(typeId, typeName),
             xAxisId,
-            new FakeAxisRichRelationalModel(xAxisId, xAxisChartId, xAxisLegend),
+            new AxisRichRelationalModel(xAxisId, xAxisChartId, xAxisLegend),
             yAxisId,
-            new FakeAxisRichRelationalModel(yAxisId, yAxisChartId, yAxisLegend),
+            new AxisRichRelationalModel(yAxisId, yAxisChartId, yAxisLegend),
             [
-                new FakeSeriesRichRelationalModel(
+                new SeriesRichRelationalModel(
                     seriesId,
                     seriesChartId,
                     seriesLegend,
@@ -225,39 +226,39 @@ public sealed record ChartRichRelationalModelConverterTests
     [Fact]
     public void RoundTrip()
     {
-        FakeGuid chartId = new FakeGuid();
+        Guid chartId = new Guid();
         IString title = new RandomString(new Char('a'), new Char('z'));
         IString description = new RandomString(new Char('a'), new Char('z'));
 
-        FakeGuid typeId = new FakeGuid();
+        Guid typeId = new Guid();
         IString typeName = new RandomString(new Char('a'), new Char('z'));
 
-        FakeGuid xAxisId = new FakeGuid();
-        FakeGuid xAxisChartId = new FakeGuid();
+        Guid xAxisId = new Guid();
+        Guid xAxisChartId = new Guid();
         IString xAxisLegend = new RandomString(new Char('a'), new Char('z'));
 
-        FakeGuid yAxisId = new FakeGuid();
-        FakeGuid yAxisChartId = new FakeGuid();
+        Guid yAxisId = new Guid();
+        Guid yAxisChartId = new Guid();
         IString yAxisLegend = new RandomString(new Char('a'), new Char('z'));
 
-        FakeGuid seriesId = new FakeGuid();
-        FakeGuid seriesChartId = new FakeGuid();
+        Guid seriesId = new Guid();
+        Guid seriesChartId = new Guid();
         IString seriesLegend = new RandomString(new Char('a'), new Char('z'));
         IString xAxisSource = new RandomString(new Char('a'), new Char('z'));
         IString yAxisSource = new RandomString(new Char('a'), new Char('z'));
 
-        IChartRichRelationalModel chart = new FakeChartRichRelationalModel(
+        IChartRichRelationalModel chart = new ChartRichRelationalModel(
             chartId,
             title,
             description,
             typeId,
-            new FakeChartTypeRichRelationalModel(typeId, typeName),
+            new ChartTypeRichRelationalModel(typeId, typeName),
             xAxisId,
-            new FakeAxisRichRelationalModel(xAxisId, xAxisChartId, xAxisLegend),
+            new AxisRichRelationalModel(xAxisId, xAxisChartId, xAxisLegend),
             yAxisId,
-            new FakeAxisRichRelationalModel(yAxisId, yAxisChartId, yAxisLegend),
+            new AxisRichRelationalModel(yAxisId, yAxisChartId, yAxisLegend),
             [
-                new FakeSeriesRichRelationalModel(
+                new SeriesRichRelationalModel(
                     seriesId,
                     seriesChartId,
                     seriesLegend,
@@ -283,31 +284,31 @@ public sealed record ChartRichRelationalModelConverterTests
     [Fact]
     public void WriteNoSeries()
     {
-        FakeGuid chartId = new FakeGuid();
+        Guid chartId = new Guid();
         IString title = new RandomString(new Char('a'), new Char('z'));
         IString description = new RandomString(new Char('a'), new Char('z'));
 
-        FakeGuid typeId = new FakeGuid();
+        Guid typeId = new Guid();
         IString typeName = new RandomString(new Char('a'), new Char('z'));
 
-        FakeGuid xAxisId = new FakeGuid();
-        FakeGuid xAxisChartId = new FakeGuid();
+        Guid xAxisId = new Guid();
+        Guid xAxisChartId = new Guid();
         IString xAxisLegend = new RandomString(new Char('a'), new Char('z'));
 
-        FakeGuid yAxisId = new FakeGuid();
-        FakeGuid yAxisChartId = new FakeGuid();
+        Guid yAxisId = new Guid();
+        Guid yAxisChartId = new Guid();
         IString yAxisLegend = new RandomString(new Char('a'), new Char('z'));
 
-        IChartRichRelationalModel chart = new FakeChartRichRelationalModel(
+        IChartRichRelationalModel chart = new ChartRichRelationalModel(
             chartId,
             title,
             description,
             typeId,
-            new FakeChartTypeRichRelationalModel(typeId, typeName),
+            new ChartTypeRichRelationalModel(typeId, typeName),
             xAxisId,
-            new FakeAxisRichRelationalModel(xAxisId, xAxisChartId, xAxisLegend),
+            new AxisRichRelationalModel(xAxisId, xAxisChartId, xAxisLegend),
             yAxisId,
-            new FakeAxisRichRelationalModel(yAxisId, yAxisChartId, yAxisLegend),
+            new AxisRichRelationalModel(yAxisId, yAxisChartId, yAxisLegend),
             []
         );
 
@@ -346,49 +347,49 @@ public sealed record ChartRichRelationalModelConverterTests
     [Fact]
     public void RoundTripMultipleSeries()
     {
-        FakeGuid chartId = new FakeGuid();
+        Guid chartId = new Guid();
         IString title = new RandomString(new Char('a'), new Char('z'));
         IString description = new RandomString(new Char('a'), new Char('z'));
 
-        FakeGuid typeId = new FakeGuid();
+        Guid typeId = new Guid();
         IString typeName = new RandomString(new Char('a'), new Char('z'));
 
-        FakeGuid xAxisId = new FakeGuid();
-        FakeGuid xAxisChartId = new FakeGuid();
+        Guid xAxisId = new Guid();
+        Guid xAxisChartId = new Guid();
         IString xAxisLegend = new RandomString(new Char('a'), new Char('z'));
 
-        FakeGuid yAxisId = new FakeGuid();
-        FakeGuid yAxisChartId = new FakeGuid();
+        Guid yAxisId = new Guid();
+        Guid yAxisChartId = new Guid();
         IString yAxisLegend = new RandomString(new Char('a'), new Char('z'));
 
-        IChartRichRelationalModel chart = new FakeChartRichRelationalModel(
+        IChartRichRelationalModel chart = new ChartRichRelationalModel(
             chartId,
             title,
             description,
             typeId,
-            new FakeChartTypeRichRelationalModel(typeId, typeName),
+            new ChartTypeRichRelationalModel(typeId, typeName),
             xAxisId,
-            new FakeAxisRichRelationalModel(xAxisId, xAxisChartId, xAxisLegend),
+            new AxisRichRelationalModel(xAxisId, xAxisChartId, xAxisLegend),
             yAxisId,
-            new FakeAxisRichRelationalModel(yAxisId, yAxisChartId, yAxisLegend),
+            new AxisRichRelationalModel(yAxisId, yAxisChartId, yAxisLegend),
             [
-                new FakeSeriesRichRelationalModel(
-                    new FakeGuid(),
-                    new FakeGuid(),
+                new SeriesRichRelationalModel(
+                    new Guid(),
+                    new Guid(),
                     new RandomString(new Char('a'), new Char('z')),
                     new RandomString(new Char('a'), new Char('z')),
                     new RandomString(new Char('a'), new Char('z'))
                 ),
-                new FakeSeriesRichRelationalModel(
-                    new FakeGuid(),
-                    new FakeGuid(),
+                new SeriesRichRelationalModel(
+                    new Guid(),
+                    new Guid(),
                     new RandomString(new Char('a'), new Char('z')),
                     new RandomString(new Char('a'), new Char('z')),
                     new RandomString(new Char('a'), new Char('z'))
                 ),
-                new FakeSeriesRichRelationalModel(
-                    new FakeGuid(),
-                    new FakeGuid(),
+                new SeriesRichRelationalModel(
+                    new Guid(),
+                    new Guid(),
                     new RandomString(new Char('a'), new Char('z')),
                     new RandomString(new Char('a'), new Char('z')),
                     new RandomString(new Char('a'), new Char('z'))
