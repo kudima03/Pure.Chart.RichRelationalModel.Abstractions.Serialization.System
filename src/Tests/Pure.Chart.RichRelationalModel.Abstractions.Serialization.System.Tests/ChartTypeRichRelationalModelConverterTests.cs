@@ -1,11 +1,11 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Pure.Chart.RichRelationalModel.Abstractions.Serialization.System.Tests.Fakes;
-using Pure.Chart.RichRelationalModel.Abstractions.Serialization.System.Tests.Hashes;
+using Pure.Chart.RichRelationalModel.HashCodes;
 using Pure.Primitives.Abstractions.Serialization.System;
 using Pure.Primitives.Abstractions.String;
 using Pure.Primitives.Random.String;
 using Char = Pure.Primitives.Char.Char;
+using Guid = Pure.Primitives.Guid.Guid;
 
 namespace Pure.Chart.RichRelationalModel.Abstractions.Serialization.System.Tests;
 
@@ -36,10 +36,10 @@ public sealed record ChartTypeRichRelationalModelConverterTests
     [Fact]
     public void Write()
     {
-        FakeGuid id = new FakeGuid();
+        Guid id = new Guid();
         IString name = new RandomString(new Char('a'), new Char('z'));
 
-        IChartTypeRichRelationalModel chartType = new FakeChartTypeRichRelationalModel(
+        IChartTypeRichRelationalModel chartType = new ChartTypeRichRelationalModel(
             id,
             name
         );
@@ -60,7 +60,7 @@ public sealed record ChartTypeRichRelationalModelConverterTests
     [Fact]
     public void Read()
     {
-        FakeGuid id = new FakeGuid();
+        Guid id = new Guid();
         IString name = new RandomString(new Char('a'), new Char('z'));
 
         string input = $$"""
@@ -72,7 +72,7 @@ public sealed record ChartTypeRichRelationalModelConverterTests
 
         Assert.True(
             new ChartTypeRichRelationalModelHash(
-                new FakeChartTypeRichRelationalModel(id, name)
+                new ChartTypeRichRelationalModel(id, name)
             ).SequenceEqual(
                 new ChartTypeRichRelationalModelHash(
                     JsonSerializer.Deserialize<IChartTypeRichRelationalModel>(
@@ -87,10 +87,10 @@ public sealed record ChartTypeRichRelationalModelConverterTests
     [Fact]
     public void RoundTrip()
     {
-        FakeGuid id = new FakeGuid();
+        Guid id = new Guid();
         IString name = new RandomString(new Char('a'), new Char('z'));
 
-        IChartTypeRichRelationalModel chartType = new FakeChartTypeRichRelationalModel(
+        IChartTypeRichRelationalModel chartType = new ChartTypeRichRelationalModel(
             id,
             name
         );
