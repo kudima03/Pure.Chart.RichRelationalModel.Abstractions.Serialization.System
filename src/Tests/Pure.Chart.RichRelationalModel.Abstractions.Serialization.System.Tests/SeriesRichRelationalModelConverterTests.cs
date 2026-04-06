@@ -1,11 +1,11 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Pure.Chart.RichRelationalModel.Abstractions.Serialization.System.Tests.Fakes;
-using Pure.Chart.RichRelationalModel.Abstractions.Serialization.System.Tests.Hashes;
+using Pure.Chart.RichRelationalModel.HashCodes;
 using Pure.Primitives.Abstractions.Serialization.System;
 using Pure.Primitives.Abstractions.String;
 using Pure.Primitives.Random.String;
 using Char = Pure.Primitives.Char.Char;
+using Guid = Pure.Primitives.Guid.Guid;
 
 namespace Pure.Chart.RichRelationalModel.Abstractions.Serialization.System.Tests;
 
@@ -36,13 +36,13 @@ public sealed record SeriesRichRelationalModelConverterTests
     [Fact]
     public void Write()
     {
-        FakeGuid id = new FakeGuid();
-        FakeGuid chartId = new FakeGuid();
+        Guid id = new Guid();
+        Guid chartId = new Guid();
         IString legend = new RandomString(new Char('a'), new Char('z'));
         IString xAxisSource = new RandomString(new Char('a'), new Char('z'));
         IString yAxisSource = new RandomString(new Char('a'), new Char('z'));
 
-        ISeriesRichRelationalModel series = new FakeSeriesRichRelationalModel(
+        ISeriesRichRelationalModel series = new SeriesRichRelationalModel(
             id,
             chartId,
             legend,
@@ -69,8 +69,8 @@ public sealed record SeriesRichRelationalModelConverterTests
     [Fact]
     public void Read()
     {
-        FakeGuid id = new FakeGuid();
-        FakeGuid chartId = new FakeGuid();
+        Guid id = new Guid();
+        Guid chartId = new Guid();
         IString legend = new RandomString(new Char('a'), new Char('z'));
         IString xAxisSource = new RandomString(new Char('a'), new Char('z'));
         IString yAxisSource = new RandomString(new Char('a'), new Char('z'));
@@ -87,7 +87,7 @@ public sealed record SeriesRichRelationalModelConverterTests
 
         Assert.True(
             new SeriesRichRelationalModelHash(
-                new FakeSeriesRichRelationalModel(
+                new SeriesRichRelationalModel(
                     id,
                     chartId,
                     legend,
@@ -108,13 +108,13 @@ public sealed record SeriesRichRelationalModelConverterTests
     [Fact]
     public void RoundTrip()
     {
-        FakeGuid id = new FakeGuid();
-        FakeGuid chartId = new FakeGuid();
+        Guid id = new Guid();
+        Guid chartId = new Guid();
         IString legend = new RandomString(new Char('a'), new Char('z'));
         IString xAxisSource = new RandomString(new Char('a'), new Char('z'));
         IString yAxisSource = new RandomString(new Char('a'), new Char('z'));
 
-        ISeriesRichRelationalModel series = new FakeSeriesRichRelationalModel(
+        ISeriesRichRelationalModel series = new SeriesRichRelationalModel(
             id,
             chartId,
             legend,
