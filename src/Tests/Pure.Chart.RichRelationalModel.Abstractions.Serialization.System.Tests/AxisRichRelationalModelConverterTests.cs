@@ -1,11 +1,11 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Pure.Chart.RichRelationalModel.Abstractions.Serialization.System.Tests.Fakes;
-using Pure.Chart.RichRelationalModel.Abstractions.Serialization.System.Tests.Hashes;
+using Pure.Chart.RichRelationalModel.HashCodes;
 using Pure.Primitives.Abstractions.Serialization.System;
 using Pure.Primitives.Abstractions.String;
 using Pure.Primitives.Random.String;
 using Char = Pure.Primitives.Char.Char;
+using Guid = Pure.Primitives.Guid.Guid;
 
 namespace Pure.Chart.RichRelationalModel.Abstractions.Serialization.System.Tests;
 
@@ -36,15 +36,11 @@ public sealed record AxisRichRelationalModelConverterTests
     [Fact]
     public void Write()
     {
-        FakeGuid id = new FakeGuid();
-        FakeGuid chartId = new FakeGuid();
+        Guid id = new Guid();
+        Guid chartId = new Guid();
         IString legend = new RandomString(new Char('a'), new Char('z'));
 
-        IAxisRichRelationalModel axis = new FakeAxisRichRelationalModel(
-            id,
-            chartId,
-            legend
-        );
+        IAxisRichRelationalModel axis = new AxisRichRelationalModel(id, chartId, legend);
 
         string serialized = JsonSerializer.Serialize(axis, _options);
 
@@ -63,8 +59,8 @@ public sealed record AxisRichRelationalModelConverterTests
     [Fact]
     public void Read()
     {
-        FakeGuid id = new FakeGuid();
-        FakeGuid chartId = new FakeGuid();
+        Guid id = new Guid();
+        Guid chartId = new Guid();
         IString legend = new RandomString(new Char('a'), new Char('z'));
 
         string input = $$"""
@@ -77,7 +73,7 @@ public sealed record AxisRichRelationalModelConverterTests
 
         Assert.True(
             new AxisRichRelationalModelHash(
-                new FakeAxisRichRelationalModel(id, chartId, legend)
+                new AxisRichRelationalModel(id, chartId, legend)
             ).SequenceEqual(
                 new AxisRichRelationalModelHash(
                     JsonSerializer.Deserialize<IAxisRichRelationalModel>(input, _options)!
@@ -89,15 +85,11 @@ public sealed record AxisRichRelationalModelConverterTests
     [Fact]
     public void RoundTrip()
     {
-        FakeGuid id = new FakeGuid();
-        FakeGuid chartId = new FakeGuid();
+        Guid id = new Guid();
+        Guid chartId = new Guid();
         IString legend = new RandomString(new Char('a'), new Char('z'));
 
-        IAxisRichRelationalModel axis = new FakeAxisRichRelationalModel(
-            id,
-            chartId,
-            legend
-        );
+        IAxisRichRelationalModel axis = new AxisRichRelationalModel(id, chartId, legend);
 
         IAxisRichRelationalModel deserialized =
             JsonSerializer.Deserialize<IAxisRichRelationalModel>(
