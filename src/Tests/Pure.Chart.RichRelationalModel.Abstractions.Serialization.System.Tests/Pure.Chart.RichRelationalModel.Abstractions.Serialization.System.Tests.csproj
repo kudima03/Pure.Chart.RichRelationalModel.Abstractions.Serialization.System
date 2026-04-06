@@ -8,7 +8,11 @@
   <ItemGroup>
     <PackageReference Include="coverlet.collector" Version="6.0.4" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
-    <PackageReference Include="Pure.HashCodes" Version="2.1.0" />
+    <PackageReference Include="Pure.Chart.RichRelationalModel" Version="0.1.0-preview.1.0.0" />
+    <PackageReference
+      Include="Pure.Chart.RichRelationalModel.HashCodes"
+      Version="0.1.0-preview.0.1.0"
+    />
     <PackageReference
       Include="Pure.Primitives.Abstractions.Serialization.System"
       Version="0.1.0-preview.0.1.0"
