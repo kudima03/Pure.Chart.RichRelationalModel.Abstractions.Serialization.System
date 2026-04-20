@@ -6,20 +6,21 @@ using Pure.Primitives.Abstractions.String;
 
 namespace Pure.Chart.RichRelationalModel.Abstractions.Serialization.System;
 
-internal sealed record SeriesRichRelationalModelJsonModel : ISeriesRichRelationalModel
+internal sealed record ChartSeriesRichRelationalModelJsonModel
+    : IChartSeriesRichRelationalModel
 {
-    public SeriesRichRelationalModelJsonModel(ISeriesRichRelationalModel model)
+    public ChartSeriesRichRelationalModelJsonModel(IChartSeriesRichRelationalModel model)
         : this(
             model.Id,
             model.ChartId,
-            ((ISeriesRelationalModel)model).Legend,
-            ((ISeriesRelationalModel)model).XAxisSource,
-            ((ISeriesRelationalModel)model).YAxisSource
+            ((IChartSeriesRelationalModel)model).Legend,
+            ((IChartSeriesRelationalModel)model).XAxisSource,
+            ((IChartSeriesRelationalModel)model).YAxisSource
         )
     { }
 
     [JsonConstructor]
-    public SeriesRichRelationalModelJsonModel(
+    public ChartSeriesRichRelationalModelJsonModel(
         IGuid id,
         IGuid chartId,
         IString legend,
@@ -45,16 +46,16 @@ internal sealed record SeriesRichRelationalModelJsonModel : ISeriesRichRelationa
     public IString YAxisSource { get; }
 }
 
-public sealed class SeriesRichRelationalModelConverter
-    : JsonConverter<ISeriesRichRelationalModel>
+public sealed class ChartSeriesRichRelationalModelConverter
+    : JsonConverter<IChartSeriesRichRelationalModel>
 {
-    public override ISeriesRichRelationalModel Read(
+    public override IChartSeriesRichRelationalModel Read(
         ref Utf8JsonReader reader,
         Type typeToConvert,
         JsonSerializerOptions options
     )
     {
-        return JsonSerializer.Deserialize<SeriesRichRelationalModelJsonModel>(
+        return JsonSerializer.Deserialize<ChartSeriesRichRelationalModelJsonModel>(
             ref reader,
             options
         )!;
@@ -62,13 +63,13 @@ public sealed class SeriesRichRelationalModelConverter
 
     public override void Write(
         Utf8JsonWriter writer,
-        ISeriesRichRelationalModel value,
+        IChartSeriesRichRelationalModel value,
         JsonSerializerOptions options
     )
     {
         JsonSerializer.Serialize(
             writer,
-            new SeriesRichRelationalModelJsonModel(value),
+            new ChartSeriesRichRelationalModelJsonModel(value),
             options
         );
     }

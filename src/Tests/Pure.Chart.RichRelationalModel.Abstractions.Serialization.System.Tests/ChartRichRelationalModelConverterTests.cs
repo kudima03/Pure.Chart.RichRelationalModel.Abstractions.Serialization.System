@@ -70,7 +70,7 @@ public sealed record ChartRichRelationalModelConverterTests
         IString seriesLegend = new RandomString(new Char('a'), new Char('z'));
         IString xAxisSource = new RandomString(new Char('a'), new Char('z'));
         IString yAxisSource = new RandomString(new Char('a'), new Char('z'));
-        SeriesRichRelationalModel series = new SeriesRichRelationalModel(
+        ChartSeriesRichRelationalModel series = new ChartSeriesRichRelationalModel(
             seriesId,
             seriesChartId,
             seriesLegend,
@@ -166,7 +166,7 @@ public sealed record ChartRichRelationalModelConverterTests
             yAxisId,
             new AxisRichRelationalModel(yAxisId, yAxisChartId, yAxisLegend),
             [
-                new SeriesRichRelationalModel(
+                new ChartSeriesRichRelationalModel(
                     seriesId,
                     seriesChartId,
                     seriesLegend,
@@ -257,7 +257,7 @@ public sealed record ChartRichRelationalModelConverterTests
             yAxisId,
             new AxisRichRelationalModel(yAxisId, yAxisChartId, yAxisLegend),
             [
-                new SeriesRichRelationalModel(
+                new ChartSeriesRichRelationalModel(
                     seriesId,
                     seriesChartId,
                     seriesLegend,
@@ -372,21 +372,21 @@ public sealed record ChartRichRelationalModelConverterTests
             yAxisId,
             new AxisRichRelationalModel(yAxisId, yAxisChartId, yAxisLegend),
             [
-                new SeriesRichRelationalModel(
+                new ChartSeriesRichRelationalModel(
                     new Guid(),
                     new Guid(),
                     new RandomString(new Char('a'), new Char('z')),
                     new RandomString(new Char('a'), new Char('z')),
                     new RandomString(new Char('a'), new Char('z'))
                 ),
-                new SeriesRichRelationalModel(
+                new ChartSeriesRichRelationalModel(
                     new Guid(),
                     new Guid(),
                     new RandomString(new Char('a'), new Char('z')),
                     new RandomString(new Char('a'), new Char('z')),
                     new RandomString(new Char('a'), new Char('z'))
                 ),
-                new SeriesRichRelationalModel(
+                new ChartSeriesRichRelationalModel(
                     new Guid(),
                     new Guid(),
                     new RandomString(new Char('a'), new Char('z')),

@@ -9,11 +9,11 @@ using Guid = Pure.Primitives.Guid.Guid;
 
 namespace Pure.Chart.RichRelationalModel.Abstractions.Serialization.System.Tests;
 
-public sealed record SeriesRichRelationalModelConverterTests
+public sealed record ChartSeriesRichRelationalModelConverterTests
 {
     private readonly JsonSerializerOptions _options;
 
-    public SeriesRichRelationalModelConverterTests()
+    public ChartSeriesRichRelationalModelConverterTests()
     {
         _options = new JsonSerializerOptions();
 
@@ -42,7 +42,7 @@ public sealed record SeriesRichRelationalModelConverterTests
         IString xAxisSource = new RandomString(new Char('a'), new Char('z'));
         IString yAxisSource = new RandomString(new Char('a'), new Char('z'));
 
-        ISeriesRichRelationalModel series = new SeriesRichRelationalModel(
+        IChartSeriesRichRelationalModel series = new ChartSeriesRichRelationalModel(
             id,
             chartId,
             legend,
@@ -86,8 +86,8 @@ public sealed record SeriesRichRelationalModelConverterTests
             """;
 
         Assert.True(
-            new SeriesRichRelationalModelHash(
-                new SeriesRichRelationalModel(
+            new ChartSeriesRichRelationalModelHash(
+                new ChartSeriesRichRelationalModel(
                     id,
                     chartId,
                     legend,
@@ -95,8 +95,8 @@ public sealed record SeriesRichRelationalModelConverterTests
                     yAxisSource
                 )
             ).SequenceEqual(
-                new SeriesRichRelationalModelHash(
-                    JsonSerializer.Deserialize<ISeriesRichRelationalModel>(
+                new ChartSeriesRichRelationalModelHash(
+                    JsonSerializer.Deserialize<IChartSeriesRichRelationalModel>(
                         input,
                         _options
                     )!
@@ -114,7 +114,7 @@ public sealed record SeriesRichRelationalModelConverterTests
         IString xAxisSource = new RandomString(new Char('a'), new Char('z'));
         IString yAxisSource = new RandomString(new Char('a'), new Char('z'));
 
-        ISeriesRichRelationalModel series = new SeriesRichRelationalModel(
+        IChartSeriesRichRelationalModel series = new ChartSeriesRichRelationalModel(
             id,
             chartId,
             legend,
@@ -122,15 +122,15 @@ public sealed record SeriesRichRelationalModelConverterTests
             yAxisSource
         );
 
-        ISeriesRichRelationalModel deserialized =
-            JsonSerializer.Deserialize<ISeriesRichRelationalModel>(
+        IChartSeriesRichRelationalModel deserialized =
+            JsonSerializer.Deserialize<IChartSeriesRichRelationalModel>(
                 JsonSerializer.Serialize(series, _options),
                 _options
             )!;
 
         Assert.True(
-            new SeriesRichRelationalModelHash(series).SequenceEqual(
-                new SeriesRichRelationalModelHash(deserialized)
+            new ChartSeriesRichRelationalModelHash(series).SequenceEqual(
+                new ChartSeriesRichRelationalModelHash(deserialized)
             )
         );
     }

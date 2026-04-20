@@ -20,7 +20,7 @@ internal sealed record ChartRichRelationalModelJsonModel : IChartRichRelationalM
             (IAxisRichRelationalModel)model.XAxis,
             model.YAxisId,
             (IAxisRichRelationalModel)model.YAxis,
-            model.Series.Cast<ISeriesRichRelationalModel>()
+            model.Series.Cast<IChartSeriesRichRelationalModel>()
         )
     { }
 
@@ -35,7 +35,7 @@ internal sealed record ChartRichRelationalModelJsonModel : IChartRichRelationalM
         IAxisRichRelationalModel xAxis,
         IGuid yAxisId,
         IAxisRichRelationalModel yAxis,
-        IEnumerable<ISeriesRichRelationalModel> series
+        IEnumerable<IChartSeriesRichRelationalModel> series
     )
     {
         Id = id;
@@ -68,7 +68,7 @@ internal sealed record ChartRichRelationalModelJsonModel : IChartRichRelationalM
 
     public IAxisRichRelationalModel YAxis { get; }
 
-    public IEnumerable<ISeriesRichRelationalModel> Series { get; }
+    public IEnumerable<IChartSeriesRichRelationalModel> Series { get; }
 
     IChartType IChart.Type => Type;
 
@@ -76,7 +76,7 @@ internal sealed record ChartRichRelationalModelJsonModel : IChartRichRelationalM
 
     IAxis IChart.YAxis => YAxis;
 
-    IEnumerable<ISeries> IChart.Series => Series;
+    IEnumerable<IChartSeries> IChart.Series => Series;
 }
 
 public sealed class ChartRichRelationalModelConverter

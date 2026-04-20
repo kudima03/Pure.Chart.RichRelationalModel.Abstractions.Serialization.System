@@ -19,7 +19,9 @@ public sealed record ChartRichRelationalModelAbstractionsConvertersTests
 
         _ = Assert.IsType<AxisRichRelationalModelConverter>(converters.ElementAt(0));
         _ = Assert.IsType<ChartTypeRichRelationalModelConverter>(converters.ElementAt(1));
-        _ = Assert.IsType<SeriesRichRelationalModelConverter>(converters.ElementAt(2));
+        _ = Assert.IsType<ChartSeriesRichRelationalModelConverter>(
+            converters.ElementAt(2)
+        );
         _ = Assert.IsType<ChartRichRelationalModelConverter>(converters.ElementAt(3));
     }
 
