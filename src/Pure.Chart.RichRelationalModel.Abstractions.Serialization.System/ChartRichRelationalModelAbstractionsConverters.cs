@@ -10,7 +10,7 @@ public sealed class ChartRichRelationalModelAbstractionsConverters
     {
         yield return new AxisRichRelationalModelConverter();
         yield return new ChartTypeRichRelationalModelConverter();
-        yield return new SeriesRichRelationalModelConverter();
+        yield return new ChartSeriesRichRelationalModelConverter();
         yield return new ChartRichRelationalModelConverter();
     }
 
