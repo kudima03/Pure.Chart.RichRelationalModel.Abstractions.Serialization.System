@@ -48,22 +48,15 @@ public sealed record ChartRichRelationalModelConverterTests
         );
 
         Guid xAxisId = new Guid();
-        Guid xAxisChartId = new Guid();
+
         IString xAxisLegend = new RandomString(new Char('a'), new Char('z'));
-        AxisRichRelationalModel xAxis = new AxisRichRelationalModel(
-            xAxisId,
-            xAxisChartId,
-            xAxisLegend
-        );
+        AxisRichRelationalModel xAxis = new AxisRichRelationalModel(xAxisId, xAxisLegend);
 
         Guid yAxisId = new Guid();
-        Guid yAxisChartId = new Guid();
+
+        _ = new Guid();
         IString yAxisLegend = new RandomString(new Char('a'), new Char('z'));
-        AxisRichRelationalModel yAxis = new AxisRichRelationalModel(
-            yAxisId,
-            yAxisChartId,
-            yAxisLegend
-        );
+        AxisRichRelationalModel yAxis = new AxisRichRelationalModel(yAxisId, yAxisLegend);
 
         Guid seriesId = new Guid();
         Guid seriesChartId = new Guid();
@@ -107,13 +100,11 @@ public sealed record ChartRichRelationalModelConverterTests
               "XAxisId": "{{xAxisId.GuidValue}}",
               "XAxis": {
                 "Id": "{{xAxisId.GuidValue}}",
-                "ChartId": "{{xAxisChartId.GuidValue}}",
                 "Legend": "{{xAxisLegend.TextValue}}"
               },
               "YAxisId": "{{yAxisId.GuidValue}}",
               "YAxis": {
                 "Id": "{{yAxisId.GuidValue}}",
-                "ChartId": "{{yAxisChartId.GuidValue}}",
                 "Legend": "{{yAxisLegend.TextValue}}"
               },
               "Series": [
@@ -142,11 +133,10 @@ public sealed record ChartRichRelationalModelConverterTests
         IString typeName = new RandomString(new Char('a'), new Char('z'));
 
         Guid xAxisId = new Guid();
-        Guid xAxisChartId = new Guid();
+
         IString xAxisLegend = new RandomString(new Char('a'), new Char('z'));
 
         Guid yAxisId = new Guid();
-        Guid yAxisChartId = new Guid();
         IString yAxisLegend = new RandomString(new Char('a'), new Char('z'));
 
         Guid seriesId = new Guid();
@@ -162,9 +152,9 @@ public sealed record ChartRichRelationalModelConverterTests
             typeId,
             new ChartTypeRichRelationalModel(typeId, typeName),
             xAxisId,
-            new AxisRichRelationalModel(xAxisId, xAxisChartId, xAxisLegend),
+            new AxisRichRelationalModel(xAxisId, xAxisLegend),
             yAxisId,
-            new AxisRichRelationalModel(yAxisId, yAxisChartId, yAxisLegend),
+            new AxisRichRelationalModel(yAxisId, yAxisLegend),
             [
                 new ChartSeriesRichRelationalModel(
                     seriesId,
@@ -189,13 +179,12 @@ public sealed record ChartRichRelationalModelConverterTests
               "XAxisId": "{{xAxisId.GuidValue}}",
               "XAxis": {
                 "Id": "{{xAxisId.GuidValue}}",
-                "ChartId": "{{xAxisChartId.GuidValue}}",
+
                 "Legend": "{{xAxisLegend.TextValue}}"
               },
               "YAxisId": "{{yAxisId.GuidValue}}",
               "YAxis": {
                 "Id": "{{yAxisId.GuidValue}}",
-                "ChartId": "{{yAxisChartId.GuidValue}}",
                 "Legend": "{{yAxisLegend.TextValue}}"
               },
               "Series": [
@@ -233,11 +222,10 @@ public sealed record ChartRichRelationalModelConverterTests
         IString typeName = new RandomString(new Char('a'), new Char('z'));
 
         Guid xAxisId = new Guid();
-        Guid xAxisChartId = new Guid();
+
         IString xAxisLegend = new RandomString(new Char('a'), new Char('z'));
 
         Guid yAxisId = new Guid();
-        Guid yAxisChartId = new Guid();
         IString yAxisLegend = new RandomString(new Char('a'), new Char('z'));
 
         Guid seriesId = new Guid();
@@ -253,9 +241,9 @@ public sealed record ChartRichRelationalModelConverterTests
             typeId,
             new ChartTypeRichRelationalModel(typeId, typeName),
             xAxisId,
-            new AxisRichRelationalModel(xAxisId, xAxisChartId, xAxisLegend),
+            new AxisRichRelationalModel(xAxisId, xAxisLegend),
             yAxisId,
-            new AxisRichRelationalModel(yAxisId, yAxisChartId, yAxisLegend),
+            new AxisRichRelationalModel(yAxisId, yAxisLegend),
             [
                 new ChartSeriesRichRelationalModel(
                     seriesId,
@@ -291,11 +279,10 @@ public sealed record ChartRichRelationalModelConverterTests
         IString typeName = new RandomString(new Char('a'), new Char('z'));
 
         Guid xAxisId = new Guid();
-        Guid xAxisChartId = new Guid();
+
         IString xAxisLegend = new RandomString(new Char('a'), new Char('z'));
 
         Guid yAxisId = new Guid();
-        Guid yAxisChartId = new Guid();
         IString yAxisLegend = new RandomString(new Char('a'), new Char('z'));
 
         IChartRichRelationalModel chart = new ChartRichRelationalModel(
@@ -305,9 +292,9 @@ public sealed record ChartRichRelationalModelConverterTests
             typeId,
             new ChartTypeRichRelationalModel(typeId, typeName),
             xAxisId,
-            new AxisRichRelationalModel(xAxisId, xAxisChartId, xAxisLegend),
+            new AxisRichRelationalModel(xAxisId, xAxisLegend),
             yAxisId,
-            new AxisRichRelationalModel(yAxisId, yAxisChartId, yAxisLegend),
+            new AxisRichRelationalModel(yAxisId, yAxisLegend),
             []
         );
 
@@ -327,13 +314,11 @@ public sealed record ChartRichRelationalModelConverterTests
               "XAxisId": "{{xAxisId.GuidValue}}",
               "XAxis": {
                 "Id": "{{xAxisId.GuidValue}}",
-                "ChartId": "{{xAxisChartId.GuidValue}}",
                 "Legend": "{{xAxisLegend.TextValue}}"
               },
               "YAxisId": "{{yAxisId.GuidValue}}",
               "YAxis": {
                 "Id": "{{yAxisId.GuidValue}}",
-                "ChartId": "{{yAxisChartId.GuidValue}}",
                 "Legend": "{{yAxisLegend.TextValue}}"
               },
               "Series": []
@@ -354,11 +339,10 @@ public sealed record ChartRichRelationalModelConverterTests
         IString typeName = new RandomString(new Char('a'), new Char('z'));
 
         Guid xAxisId = new Guid();
-        Guid xAxisChartId = new Guid();
+
         IString xAxisLegend = new RandomString(new Char('a'), new Char('z'));
 
         Guid yAxisId = new Guid();
-        Guid yAxisChartId = new Guid();
         IString yAxisLegend = new RandomString(new Char('a'), new Char('z'));
 
         IChartRichRelationalModel chart = new ChartRichRelationalModel(
@@ -368,9 +352,9 @@ public sealed record ChartRichRelationalModelConverterTests
             typeId,
             new ChartTypeRichRelationalModel(typeId, typeName),
             xAxisId,
-            new AxisRichRelationalModel(xAxisId, xAxisChartId, xAxisLegend),
+            new AxisRichRelationalModel(xAxisId, xAxisLegend),
             yAxisId,
-            new AxisRichRelationalModel(yAxisId, yAxisChartId, yAxisLegend),
+            new AxisRichRelationalModel(yAxisId, yAxisLegend),
             [
                 new ChartSeriesRichRelationalModel(
                     new Guid(),
