@@ -37,10 +37,9 @@ public sealed record AxisRichRelationalModelConverterTests
     public void Write()
     {
         Guid id = new Guid();
-        Guid chartId = new Guid();
         IString legend = new RandomString(new Char('a'), new Char('z'));
 
-        IAxisRichRelationalModel axis = new AxisRichRelationalModel(id, chartId, legend);
+        IAxisRichRelationalModel axis = new AxisRichRelationalModel(id, legend);
 
         string serialized = JsonSerializer.Serialize(axis, _options);
 
@@ -48,7 +47,6 @@ public sealed record AxisRichRelationalModelConverterTests
             $$"""
             {
               "Id": "{{id.GuidValue}}",
-              "ChartId": "{{chartId.GuidValue}}",
               "Legend": "{{legend.TextValue}}"
             }
             """,
@@ -60,20 +58,18 @@ public sealed record AxisRichRelationalModelConverterTests
     public void Read()
     {
         Guid id = new Guid();
-        Guid chartId = new Guid();
         IString legend = new RandomString(new Char('a'), new Char('z'));
 
         string input = $$"""
             {
               "Id": "{{id.GuidValue}}",
-              "ChartId": "{{chartId.GuidValue}}",
               "Legend": "{{legend.TextValue}}"
             }
             """;
 
         Assert.True(
             new AxisRichRelationalModelHash(
-                new AxisRichRelationalModel(id, chartId, legend)
+                new AxisRichRelationalModel(id, legend)
             ).SequenceEqual(
                 new AxisRichRelationalModelHash(
                     JsonSerializer.Deserialize<IAxisRichRelationalModel>(input, _options)!
@@ -86,10 +82,9 @@ public sealed record AxisRichRelationalModelConverterTests
     public void RoundTrip()
     {
         Guid id = new Guid();
-        Guid chartId = new Guid();
         IString legend = new RandomString(new Char('a'), new Char('z'));
 
-        IAxisRichRelationalModel axis = new AxisRichRelationalModel(id, chartId, legend);
+        IAxisRichRelationalModel axis = new AxisRichRelationalModel(id, legend);
 
         IAxisRichRelationalModel deserialized =
             JsonSerializer.Deserialize<IAxisRichRelationalModel>(
