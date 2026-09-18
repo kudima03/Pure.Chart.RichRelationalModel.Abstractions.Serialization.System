@@ -1,0 +1,6 @@
+<Solution>
+  <Folder Name="/Tests/">
+    <Project Path="Tests/Pure.Chart.RichRelationalModel.Abstractions.Serialization.System.Tests/Pure.Chart.RichRelationalModel.Abstractions.Serialization.System.Tests.csproj" />
+  </Folder>
+  <Project Path="Pure.Chart.RichRelationalModel.Abstractions.Serialization.System/Pure.Chart.RichRelationalModel.Abstractions.Serialization.System.csproj" />
+</Solution>
