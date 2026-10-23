@@ -7,6 +7,19 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ---
 
+## [0.1.0-preview.3.0.0] — 2026-10-23
+
+### Changed
+
+- **`ChartSeriesRichRelationalModelConverter`** now reads and writes a
+  `LineType` property after `YAxisSource`, matching the
+  `IChartSeriesRichRelationalModel` contract in
+  `Pure.Chart.RichRelationalModel.Abstractions` 0.1.0-preview.5.0.0. Series
+  nested in **`ChartRichRelationalModelConverter`** include it as well. JSON
+  produced by earlier versions, which has no `LineType`, is no longer
+  compatible.
+- Requires `Pure.Chart.RichRelationalModel.Abstractions` 0.1.0-preview.5.0.0.
+
 ## [0.1.0-preview.2.0.1] — 2026-06-07
 
 ### Changed
