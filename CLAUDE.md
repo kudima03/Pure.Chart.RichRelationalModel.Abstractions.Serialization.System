@@ -26,11 +26,11 @@ This is a **converter library** — it provides `System.Text.Json` converters fo
 - `ChartRichRelationalModelConverter` — `JsonConverter<IChartRichRelationalModel>`
 - `ChartTypeRichRelationalModelConverter` — `JsonConverter<IChartTypeRichRelationalModel>`
 - `AxisRichRelationalModelConverter` — `JsonConverter<IAxisRichRelationalModel>`
-- `ChartSeriesRichRelationalModelConverter` — `JsonConverter<IChartSeriesRichRelationalModel>`
+- `ChartSeriesRichRelationalModelConverter` — `JsonConverter<IChartSeriesRichRelationalModel>` (properties `Id`, `ChartId`, `Legend`, `XAxisSource`, `YAxisSource`, `LineType`)
 
 Each converter uses an internal `sealed record` (e.g. `ChartRichRelationalModelJsonModel`) that implements the corresponding interface and is decorated with `[JsonConstructor]`. The `Read` method deserializes into the internal record; `Write` wraps the incoming interface value in the internal record before serializing, ensuring the full graph is always written with the expected shape.
 
-**`IChartRichRelationalModel` inherits from both `IChart` and `IChartRelationalModel`**, creating a diamond hierarchy. The internal record explicitly implements `IChart`'s covariant members (e.g. `IChartType IChart.Type`) to resolve the ambiguity — keep this pattern when adding new converters.
+**`IChartRichRelationalModel` inherits from both `IChart` and `IChartRelationalModel`**, creating a diamond hierarchy. The internal record explicitly implements `IChart`'s covariant members (e.g. `IChartType IChart.Type`) to resolve the ambiguity — keep this pattern when adding new converters. `IChartSeriesRichRelationalModel` inherits `Legend`, `XAxisSource`, `YAxisSource` and `LineType` from both `IChartSeries` and `IChartSeriesRelationalModel`, so reading them from the interface is ambiguous; cast to `IChartSeriesRelationalModel` first, as the series JSON model's copy constructor does. `ChartRichRelationalModelConverter` writes nested series through `ChartSeriesRichRelationalModelConverter`, so series fields only need to be added to the series JSON model.
 
 **Multi-targeting:** net7.0, net8.0, net9.0, net10.0. The library is **not** AOT-compatible (`IsAotCompatible` is not set).
 
@@ -38,7 +38,7 @@ Each converter uses an internal `sealed record` (e.g. `ChartRichRelationalModelJ
 
 **Publishing:** triggered by pushing a semver tag (`*.*.*`). The tag value becomes `PackageVersion`.
 
-**Tests:** The test project (`net10.0`) uses xUnit with `coverlet` for coverage. CI enforces 99 % line coverage and 99 % mutation score (dotnet-stryker).
+**Tests:** The test project (`net10.0`) uses xUnit with `coverlet` for coverage. CI enforces 99 % line coverage and 99 % mutation score (dotnet-stryker). Series tests use `Doubles/ChartSeriesRichRelationalModelDouble` because the released `Pure.Chart.RichRelationalModel` series record does not implement `LineType` yet; switch back to it once a release with `LineType` is available.
 
 ## Code Style
 
