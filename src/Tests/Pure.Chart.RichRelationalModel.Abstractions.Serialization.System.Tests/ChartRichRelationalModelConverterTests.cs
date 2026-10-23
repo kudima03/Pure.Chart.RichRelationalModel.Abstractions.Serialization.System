@@ -1,5 +1,6 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Pure.Chart.RichRelationalModel.Abstractions.Serialization.System.Tests.Doubles;
 using Pure.Chart.RichRelationalModel.HashCodes;
 using Pure.Primitives.Abstractions.Serialization.System;
 using Pure.Primitives.Abstractions.String;
@@ -63,13 +64,16 @@ public sealed record ChartRichRelationalModelConverterTests
         IString seriesLegend = new RandomString(new Char('a'), new Char('z'));
         IString xAxisSource = new RandomString(new Char('a'), new Char('z'));
         IString yAxisSource = new RandomString(new Char('a'), new Char('z'));
-        ChartSeriesRichRelationalModel series = new ChartSeriesRichRelationalModel(
-            seriesId,
-            seriesChartId,
-            seriesLegend,
-            xAxisSource,
-            yAxisSource
-        );
+        IString lineType = new RandomString(new Char('a'), new Char('z'));
+        ChartSeriesRichRelationalModelDouble series =
+            new ChartSeriesRichRelationalModelDouble(
+                seriesId,
+                seriesChartId,
+                seriesLegend,
+                xAxisSource,
+                yAxisSource,
+                lineType
+            );
 
         IChartRichRelationalModel chart = new ChartRichRelationalModel(
             chartId,
@@ -113,7 +117,8 @@ public sealed record ChartRichRelationalModelConverterTests
                   "ChartId": "{{seriesChartId.GuidValue}}",
                   "Legend": "{{seriesLegend.TextValue}}",
                   "XAxisSource": "{{xAxisSource.TextValue}}",
-                  "YAxisSource": "{{yAxisSource.TextValue}}"
+                  "YAxisSource": "{{yAxisSource.TextValue}}",
+                  "LineType": "{{lineType.TextValue}}"
                 }
               ]
             }
@@ -144,6 +149,7 @@ public sealed record ChartRichRelationalModelConverterTests
         IString seriesLegend = new RandomString(new Char('a'), new Char('z'));
         IString xAxisSource = new RandomString(new Char('a'), new Char('z'));
         IString yAxisSource = new RandomString(new Char('a'), new Char('z'));
+        IString lineType = new RandomString(new Char('a'), new Char('z'));
 
         IChartRichRelationalModel expected = new ChartRichRelationalModel(
             chartId,
@@ -156,12 +162,13 @@ public sealed record ChartRichRelationalModelConverterTests
             yAxisId,
             new AxisRichRelationalModel(yAxisId, yAxisLegend),
             [
-                new ChartSeriesRichRelationalModel(
+                new ChartSeriesRichRelationalModelDouble(
                     seriesId,
                     seriesChartId,
                     seriesLegend,
                     xAxisSource,
-                    yAxisSource
+                    yAxisSource,
+                    lineType
                 ),
             ]
         );
@@ -193,7 +200,8 @@ public sealed record ChartRichRelationalModelConverterTests
                   "ChartId": "{{seriesChartId.GuidValue}}",
                   "Legend": "{{seriesLegend.TextValue}}",
                   "XAxisSource": "{{xAxisSource.TextValue}}",
-                  "YAxisSource": "{{yAxisSource.TextValue}}"
+                  "YAxisSource": "{{yAxisSource.TextValue}}",
+                  "LineType": "{{lineType.TextValue}}"
                 }
               ]
             }
@@ -233,6 +241,7 @@ public sealed record ChartRichRelationalModelConverterTests
         IString seriesLegend = new RandomString(new Char('a'), new Char('z'));
         IString xAxisSource = new RandomString(new Char('a'), new Char('z'));
         IString yAxisSource = new RandomString(new Char('a'), new Char('z'));
+        IString lineType = new RandomString(new Char('a'), new Char('z'));
 
         IChartRichRelationalModel chart = new ChartRichRelationalModel(
             chartId,
@@ -245,12 +254,13 @@ public sealed record ChartRichRelationalModelConverterTests
             yAxisId,
             new AxisRichRelationalModel(yAxisId, yAxisLegend),
             [
-                new ChartSeriesRichRelationalModel(
+                new ChartSeriesRichRelationalModelDouble(
                     seriesId,
                     seriesChartId,
                     seriesLegend,
                     xAxisSource,
-                    yAxisSource
+                    yAxisSource,
+                    lineType
                 ),
             ]
         );
@@ -356,23 +366,26 @@ public sealed record ChartRichRelationalModelConverterTests
             yAxisId,
             new AxisRichRelationalModel(yAxisId, yAxisLegend),
             [
-                new ChartSeriesRichRelationalModel(
+                new ChartSeriesRichRelationalModelDouble(
                     new Guid(),
                     new Guid(),
                     new RandomString(new Char('a'), new Char('z')),
-                    new RandomString(new Char('a'), new Char('z')),
-                    new RandomString(new Char('a'), new Char('z'))
-                ),
-                new ChartSeriesRichRelationalModel(
-                    new Guid(),
-                    new Guid(),
                     new RandomString(new Char('a'), new Char('z')),
                     new RandomString(new Char('a'), new Char('z')),
                     new RandomString(new Char('a'), new Char('z'))
                 ),
-                new ChartSeriesRichRelationalModel(
+                new ChartSeriesRichRelationalModelDouble(
                     new Guid(),
                     new Guid(),
+                    new RandomString(new Char('a'), new Char('z')),
+                    new RandomString(new Char('a'), new Char('z')),
+                    new RandomString(new Char('a'), new Char('z')),
+                    new RandomString(new Char('a'), new Char('z'))
+                ),
+                new ChartSeriesRichRelationalModelDouble(
+                    new Guid(),
+                    new Guid(),
+                    new RandomString(new Char('a'), new Char('z')),
                     new RandomString(new Char('a'), new Char('z')),
                     new RandomString(new Char('a'), new Char('z')),
                     new RandomString(new Char('a'), new Char('z'))

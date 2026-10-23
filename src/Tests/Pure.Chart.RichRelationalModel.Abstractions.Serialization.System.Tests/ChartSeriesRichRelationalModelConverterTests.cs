@@ -1,6 +1,7 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Pure.Chart.RichRelationalModel.HashCodes;
+using Pure.Chart.RelationalModel.HashCodes;
+using Pure.Chart.RichRelationalModel.Abstractions.Serialization.System.Tests.Doubles;
 using Pure.Primitives.Abstractions.Serialization.System;
 using Pure.Primitives.Abstractions.String;
 using Pure.Primitives.Random.String;
@@ -41,13 +42,15 @@ public sealed record ChartSeriesRichRelationalModelConverterTests
         IString legend = new RandomString(new Char('a'), new Char('z'));
         IString xAxisSource = new RandomString(new Char('a'), new Char('z'));
         IString yAxisSource = new RandomString(new Char('a'), new Char('z'));
+        IString lineType = new RandomString(new Char('a'), new Char('z'));
 
-        IChartSeriesRichRelationalModel series = new ChartSeriesRichRelationalModel(
+        IChartSeriesRichRelationalModel series = new ChartSeriesRichRelationalModelDouble(
             id,
             chartId,
             legend,
             xAxisSource,
-            yAxisSource
+            yAxisSource,
+            lineType
         );
 
         string serialized = JsonSerializer.Serialize(series, _options);
@@ -59,7 +62,8 @@ public sealed record ChartSeriesRichRelationalModelConverterTests
               "ChartId": "{{chartId.GuidValue}}",
               "Legend": "{{legend.TextValue}}",
               "XAxisSource": "{{xAxisSource.TextValue}}",
-              "YAxisSource": "{{yAxisSource.TextValue}}"
+              "YAxisSource": "{{yAxisSource.TextValue}}",
+              "LineType": "{{lineType.TextValue}}"
             }
             """,
             serialized
@@ -74,6 +78,7 @@ public sealed record ChartSeriesRichRelationalModelConverterTests
         IString legend = new RandomString(new Char('a'), new Char('z'));
         IString xAxisSource = new RandomString(new Char('a'), new Char('z'));
         IString yAxisSource = new RandomString(new Char('a'), new Char('z'));
+        IString lineType = new RandomString(new Char('a'), new Char('z'));
 
         string input = $$"""
             {
@@ -81,21 +86,23 @@ public sealed record ChartSeriesRichRelationalModelConverterTests
               "ChartId": "{{chartId.GuidValue}}",
               "Legend": "{{legend.TextValue}}",
               "XAxisSource": "{{xAxisSource.TextValue}}",
-              "YAxisSource": "{{yAxisSource.TextValue}}"
+              "YAxisSource": "{{yAxisSource.TextValue}}",
+              "LineType": "{{lineType.TextValue}}"
             }
             """;
 
         Assert.True(
-            new ChartSeriesRichRelationalModelHash(
-                new ChartSeriesRichRelationalModel(
+            new ChartSeriesRelationalModelHash(
+                new ChartSeriesRichRelationalModelDouble(
                     id,
                     chartId,
                     legend,
                     xAxisSource,
-                    yAxisSource
+                    yAxisSource,
+                    lineType
                 )
             ).SequenceEqual(
-                new ChartSeriesRichRelationalModelHash(
+                new ChartSeriesRelationalModelHash(
                     JsonSerializer.Deserialize<IChartSeriesRichRelationalModel>(
                         input,
                         _options
@@ -113,13 +120,15 @@ public sealed record ChartSeriesRichRelationalModelConverterTests
         IString legend = new RandomString(new Char('a'), new Char('z'));
         IString xAxisSource = new RandomString(new Char('a'), new Char('z'));
         IString yAxisSource = new RandomString(new Char('a'), new Char('z'));
+        IString lineType = new RandomString(new Char('a'), new Char('z'));
 
-        IChartSeriesRichRelationalModel series = new ChartSeriesRichRelationalModel(
+        IChartSeriesRichRelationalModel series = new ChartSeriesRichRelationalModelDouble(
             id,
             chartId,
             legend,
             xAxisSource,
-            yAxisSource
+            yAxisSource,
+            lineType
         );
 
         IChartSeriesRichRelationalModel deserialized =
@@ -129,8 +138,8 @@ public sealed record ChartSeriesRichRelationalModelConverterTests
             )!;
 
         Assert.True(
-            new ChartSeriesRichRelationalModelHash(series).SequenceEqual(
-                new ChartSeriesRichRelationalModelHash(deserialized)
+            new ChartSeriesRelationalModelHash(series).SequenceEqual(
+                new ChartSeriesRelationalModelHash(deserialized)
             )
         );
     }
