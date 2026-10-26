@@ -13,7 +13,7 @@
       Include="Pure.Chart.RelationalModel.HashCodes"
       Version="0.1.0-preview.3.0.0"
     />
-    <PackageReference Include="Pure.Chart.RichRelationalModel" Version="0.1.0-preview.3.0.0" />
+    <PackageReference Include="Pure.Chart.RichRelationalModel" Version="0.1.0-preview.4.0.0" />
     <PackageReference
       Include="Pure.Chart.RichRelationalModel.HashCodes"
       Version="0.1.0-preview.2.0.0"
