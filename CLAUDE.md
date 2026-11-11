@@ -32,13 +32,13 @@ Each converter uses an internal `sealed record` (e.g. `ChartRichRelationalModelJ
 
 **`IChartRichRelationalModel` inherits from both `IChart` and `IChartRelationalModel`**, creating a diamond hierarchy. The internal record explicitly implements `IChart`'s covariant members (e.g. `IChartType IChart.Type`) to resolve the ambiguity — keep this pattern when adding new converters. `IChartSeriesRichRelationalModel` inherits `Legend`, `XAxisSource`, `YAxisSource` and `LineType` from both `IChartSeries` and `IChartSeriesRelationalModel`, so reading them from the interface is ambiguous; cast to `IChartSeriesRelationalModel` first, as the series JSON model's copy constructor does. `ChartRichRelationalModelConverter` writes nested series through `ChartSeriesRichRelationalModelConverter`, so series fields only need to be added to the series JSON model.
 
-**Multi-targeting:** net7.0, net8.0, net9.0, net10.0. The library is **not** AOT-compatible (`IsAotCompatible` is not set).
+**Multi-targeting:** net7.0, net8.0, net9.0, net10.0, net11.0. The library is **not** AOT-compatible (`IsAotCompatible` is not set).
 
 **Package validation:** `EnablePackageValidation = true` with `PackageValidationBaselineVersion = 0.1.0-preview.2.0.0`. Breaking API changes fail the build.
 
 **Publishing:** triggered by pushing a semver tag (`*.*.*`). The tag value becomes `PackageVersion`.
 
-**Tests:** The test project (`net10.0`) uses xUnit with `coverlet` for coverage. CI enforces 99 % line coverage and 99 % mutation score (dotnet-stryker). Series tests use `Doubles/ChartSeriesRichRelationalModelDouble` because the released `Pure.Chart.RichRelationalModel` series record does not implement `LineType` yet; switch back to it once a release with `LineType` is available.
+**Tests:** The test project (`net11.0`) uses xUnit with `coverlet` for coverage. CI enforces 99 % line coverage and 99 % mutation score (dotnet-stryker). Series tests use `Doubles/ChartSeriesRichRelationalModelDouble` because the released `Pure.Chart.RichRelationalModel` series record does not implement `LineType` yet; switch back to it once a release with `LineType` is available.
 
 ## Code Style
 

@@ -46,6 +46,7 @@ A series is written as an object with `Id`, `ChartId`, `Legend`, `XAxisSource`, 
 - .NET 8
 - .NET 9
 - .NET 10
+- .NET 11
 
 ## Installation
 
